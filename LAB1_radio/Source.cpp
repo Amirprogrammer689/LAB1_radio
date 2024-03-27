@@ -1,3 +1,4 @@
+//Создание файла samples
 #define _USE_MATH_DEFINES
 #include <windows.h>
 #include <stdio.h>
