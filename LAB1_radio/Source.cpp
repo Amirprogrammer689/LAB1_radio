@@ -7,7 +7,7 @@
 #define FFT_POINTS 1000
 #define FFT_POINTS2 ((double)FFT_POINTS * (double)FFT_POINTS)
 #define FS 1.0E+6
-const double F = 3.0E+4; // Frequency of the input signal
+const double F = 100; // Frequency of the input signal
 const double DT = 1.0 / FS; // Sampling interval
 const double DF = FS / FFT_POINTS; // Frequency step
 const double Mag = 1.0; // Magnitude of the input signal
@@ -19,7 +19,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
 {
 	char Txt[512];
-	sprintf_s(Txt, sizeof(Txt), "samples.txt");
+	sprintf_s(Txt, sizeof(Txt), "samples100Hz.txt");
 	memset(&ofn, 0, sizeof(OPENFILENAME));
 	ofn.lStructSize = sizeof(OPENFILENAME);
 	ofn.hwndOwner = NULL;
