@@ -18,8 +18,9 @@ fftw_plan pDir;
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
 {
+	double S[FFT_POINTS]; // Массив для отображения сигнала
 	char Txt[512];
-	sprintf_s(Txt, sizeof(Txt), "samples33333.txt");
+	sprintf_s(Txt, sizeof(Txt), "samples_dual_frequency_signal.txt");
 	memset(&ofn, 0, sizeof(OPENFILENAME));
 	ofn.lStructSize = sizeof(OPENFILENAME);
 	ofn.hwndOwner = NULL;
@@ -52,10 +53,15 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		return FALSE;
 	}
 	ZeroMemory(In, FFT_POINTS * sizeof(fftw_complex));
-	for (int i = 0; i < FFT_POINTS; i++)
+	for (int i = 0; i < FFT_POINTS; i++) 
+	{
+		In[i][0] = S[i] = Mag * cos(2 * M_PI * F * DT * i) + Mag * cos(2 * M_PI * (F + 1000) * DT * i);
+	}
+
+	/*for (int i = 0; i < FFT_POINTS; i++)
 	{
 		In[i][0] = Mag * cos(2 * M_PI * F * DT * i);
-	}
+	}*/
 	fftw_execute(pDir);
 	char buffer[256];
 	DWORD ByteNum;
