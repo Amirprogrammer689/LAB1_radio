@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "fftw3.h"
-#define FFT_POINTS 10000
+#define FFT_POINTS 50000
 #define FFT_POINTS2 ((double)FFT_POINTS * (double)FFT_POINTS)
 #define FS 1.0E+6
 const double F = 33333; // Frequency of the input signal
