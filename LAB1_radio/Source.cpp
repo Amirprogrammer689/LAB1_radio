@@ -6,7 +6,7 @@
 #include <math.h>
 #include "fftw3.h"
 
-#define FFT_POINTS 1000
+#define FFT_POINTS 300
 #define FFT_POINTS2 ((double)FFT_POINTS * (double)FFT_POINTS)
 #define FS 1.0E+6
 
@@ -25,7 +25,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 {
 	double S[FFT_POINTS]; // Массив для отображения сигнала
 	char Txt[512];
-	sprintf_s(Txt, sizeof(Txt), "samples_period_100.txt");
+	sprintf_s(Txt, sizeof(Txt), "samples_meandr.txt");
 	memset(&ofn, 0, sizeof(OPENFILENAME));
 	ofn.lStructSize = sizeof(OPENFILENAME);
 	ofn.hwndOwner = NULL;
@@ -68,13 +68,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		In[i][0] = Mag * cos(2 * M_PI * F * DT * i);
 	}*/
 
-	for (int i = 0; i < FFT_POINTS; i++) {
-		In[i][0] = S[i] = Mag * cos(2 * M_PI * F * DT * i)/* + Mag * cos(2 * M_PI * (F + 1000) * DT * i)*/;
-	}
+	//for (int i = 0; i < FFT_POINTS; i++) {
+	//	In[i][0] = S[i] = Mag * cos(2 * M_PI * F * DT * i)/* + Mag * cos(2 * M_PI * (F + 1000) * DT * i)*/;
+	//}
 
-	/*int NP = (int)(1.0 / F / DT);
+	int NP = (int)(1.0 / F / DT);
 	for (int i = 0; i < FFT_POINTS; i++)
-		if (i % NP < NP / 2) In[i][0] = S[i] = Mag; else In[i][0] = S[i] = -Mag;*/
+		if (i % NP < NP / 2) In[i][0] = S[i] = Mag; else In[i][0] = S[i] = -Mag;
 
 	fftw_execute(pDir);
 	char buffer[256];
