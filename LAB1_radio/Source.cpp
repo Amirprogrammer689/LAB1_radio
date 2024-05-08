@@ -25,7 +25,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 {
 	double S[FFT_POINTS]; // Массив для отображения сигнала
 	char Txt[512];
-	sprintf_s(Txt, sizeof(Txt), "samples_unipulyar_signal_0.1.txt");
+	sprintf_s(Txt, sizeof(Txt), "samples_unipulyar_signal_0.01.txt");
 	memset(&ofn, 0, sizeof(OPENFILENAME));
 	ofn.lStructSize = sizeof(OPENFILENAME);
 	ofn.hwndOwner = NULL;
@@ -66,7 +66,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	int NP = (int)(1.0 / F / DT);
 	for (int i = 0; i < FFT_POINTS; i++) {
-		if (i % NP < NP / 10) {
+		if (i % NP < NP / 100) {
 			In[i][0] = S[i] = Mag;
 		}
 		else {
