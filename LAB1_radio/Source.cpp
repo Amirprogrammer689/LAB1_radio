@@ -6,7 +6,7 @@
 #include <math.h>
 #include "fftw3.h"
 
-#define FFT_POINTS 2000
+#define FFT_POINTS 10000
 #define FFT_POINTS2 ((double)FFT_POINTS * (double)FFT_POINTS)
 #define FS 1.0E+6
 
@@ -25,7 +25,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 {
 	double S[FFT_POINTS]; // Массив для отображения сигнала
 	char Txt[512];
-	sprintf_s(Txt, sizeof(Txt), "samples_density_pryam_signal_2k_points.txt");
+	sprintf_s(Txt, sizeof(Txt), "samples_density_pryam_signal_10k_points.txt");
 	memset(&ofn, 0, sizeof(OPENFILENAME));
 	ofn.lStructSize = sizeof(OPENFILENAME);
 	ofn.hwndOwner = NULL;
