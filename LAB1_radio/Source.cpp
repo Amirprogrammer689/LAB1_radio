@@ -6,11 +6,11 @@
 #include <math.h>
 #include "fftw3.h"
 
-#define FFT_POINTS 300
+#define FFT_POINTS 1000
 #define FFT_POINTS2 ((double)FFT_POINTS * (double)FFT_POINTS)
 #define FS 1.0E+6
 
-const double F = 100000; // Frequency of the input signal
+const double F = 10000; // Frequency of the input signal
 const double DT = 1.0 / FS; // Sampling interval
 const double DF = FS / FFT_POINTS; // Frequency step
 const double Mag = 1.0; // Magnitude of the input signal
@@ -25,7 +25,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 {
 	double S[FFT_POINTS]; // Массив для отображения сигнала
 	char Txt[512];
-	sprintf_s(Txt, sizeof(Txt), "samples_meandr.txt");
+	sprintf_s(Txt, sizeof(Txt), "samples_density_pryam_signal_1k_points.txt");
 	memset(&ofn, 0, sizeof(OPENFILENAME));
 	ofn.lStructSize = sizeof(OPENFILENAME);
 	ofn.hwndOwner = NULL;
@@ -83,9 +83,16 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	for (int i = 0; i < FFT_POINTS; i++)
 	{
 		P = (Out[i][0] * Out[i][0] + Out[i][1] * Out[i][1]) / FFT_POINTS2;
-		sprintf_s(buffer, sizeof(buffer), " % .8g\t % .8g\r\n", i * DF, S[i]);
+		sprintf_s(buffer, sizeof(buffer), "%.8g\t%.8g\t%.8g\r\n", i * DF, S[i], P);
 		WriteFile(hFile, buffer, strlen(buffer), &ByteNum, NULL);
 	}
+
+	/*for (int i = 0; i < FFT_POINTS; i++)
+	{
+		P = (Out[i][0] * Out[i][0] + Out[i][1] * Out[i][1]) / FFT_POINTS2;
+		sprintf_s(buffer, sizeof(buffer), " % .8g\t % .8g\r\n", i * DF, S[i]);
+		WriteFile(hFile, buffer, strlen(buffer), &ByteNum, NULL);
+	}*/
 
 	/*for (int i = 0; i < FFT_POINTS; i++)
 	{
