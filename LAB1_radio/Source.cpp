@@ -25,7 +25,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 {
 	double S[FFT_POINTS]; // Массив для отображения сигнала
 	char Txt[512];
-	sprintf_s(Txt, sizeof(Txt), "samples_unipulyar_signal_0.01.txt");
+	sprintf_s(Txt, sizeof(Txt), "samples_pila.txt");
 	memset(&ofn, 0, sizeof(OPENFILENAME));
 	ofn.lStructSize = sizeof(OPENFILENAME);
 	ofn.hwndOwner = NULL;
@@ -58,21 +58,25 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		return FALSE;
 	}
 	ZeroMemory(In, FFT_POINTS * sizeof(fftw_complex));
+	// Получение пилообразного сигнала
+	for (int i = 0; i < FFT_POINTS; i++) {
+		In[i][0] = S[i] = Mag * (2 * fmod(F * i * DT, 1) - 1);
+	}
 
 	/*for (int i = 0; i < FFT_POINTS; i++) 
 	{
 		In[i][0] = S[i] = Mag * cos(2 * M_PI * F * DT * i) + Mag * cos(2 * M_PI * (F + 1000) * DT * i);
 	}*/
 
-	int NP = (int)(1.0 / F / DT);
+	/*int NP = (int)(1.0 / F / DT);
 	for (int i = 0; i < FFT_POINTS; i++) {
-		if (i % NP < NP / 100) {
+		if (i % NP < NP /12) {
 			In[i][0] = S[i] = Mag;
 		}
 		else {
 			In[i][0] = S[i] = 0;
 		}
-	}
+	}*/
 
 	/*for (int i = 0; i < FFT_POINTS; i++)
 	{
